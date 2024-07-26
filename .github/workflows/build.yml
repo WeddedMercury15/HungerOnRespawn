@@ -27,5 +27,5 @@ jobs:
     - name: Archive JAR
       uses: actions/upload-artifact@v3
       with:
-        name: plugin-jar
+        name: HungerOnRespawn
         path: target/*.jar
