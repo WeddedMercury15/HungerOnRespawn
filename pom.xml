@@ -55,8 +55,8 @@
           <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
       </repository>
       <repository>
-          <id>sonatype</id>
-          <url>https://oss.sonatype.org/content/groups/public/</url>
+          <id>central</id>
+          <url>https://repo.maven.apache.org/maven2</url>
       </repository>
   </repositories>
 
@@ -64,7 +64,7 @@
       <dependency>
           <groupId>org.spigotmc</groupId>
           <artifactId>spigot-api</artifactId>
-          <version>1.12.2-R0.1-SNAPSHOT</version>
+          <version>1.13.2-R0.1-SNAPSHOT</version> <!-- Adjust as needed -->
           <scope>provided</scope>
       </dependency>
   </dependencies>
