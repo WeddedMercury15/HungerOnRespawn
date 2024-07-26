@@ -3,7 +3,6 @@ package com.hungeronrespawn;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 public class HungerOnRespawnCommandExecutor implements CommandExecutor {
 
@@ -33,8 +32,7 @@ public class HungerOnRespawnCommandExecutor implements CommandExecutor {
 
     private boolean handleReload(CommandSender sender) {
         if (sender.hasPermission("hungeronrespawn.reload")) {
-            plugin.reloadConfig(); // 重新加载配置文件
-            plugin.loadConfig(); // 更新配置中的饱食度值
+            plugin.reloadPluginConfig();
             sender.sendMessage("Config reloaded.");
             return true;
         } else {

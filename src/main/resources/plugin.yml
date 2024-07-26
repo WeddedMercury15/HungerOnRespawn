@@ -1,24 +1,20 @@
 name: HungerOnRespawn
 version: 1.0
-main: com.hungeronrespawn.HungerOnRespawn
+main: com.hungeronrespawn.HungerOnRespawnPlugin
 description: Sets player hunger level upon respawn.
-author: YourName
 commands:
-  reload:
-    description: Reloads the plugin configuration.
-    usage: /<command>
-    permission: hungeronrespawn.reload
-  help:
-    description: Displays the help message.
-    usage: /<command>
-    permission: hungeronrespawn.help
+  hungeronrespawn:
+    description: HungerOnRespawn plugin commands
+    usage: /<command> [reload|help]
+    permission: hungeronrespawn.use
+    permission-message: You do not have permission to use this command.
 permissions:
   hungeronrespawn.reload:
-    description: Allows reloading the plugin configuration.
+    description: Allows the player to reload the plugin configuration
     default: op
   hungeronrespawn.help:
-    description: Allows displaying the help message.
-    default: true
+    description: Allows the player to view help information
+    default: op
   hungeronrespawn.bypass:
-    description: Allows bypassing the hunger level setting on respawn.
+    description: Allows the player to bypass hunger modification
     default: op
