@@ -4,37 +4,48 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.ChatColor;
 
-public class CommandHandler implements CommandExecutor {
-    private final HungerOnRespawn plugin;
+public class HungerOnRespawnCommandExecutor implements CommandExecutor {
 
-    public CommandHandler(HungerOnRespawn plugin) {
+    private final HungerOnRespawnPlugin plugin;
+
+    public HungerOnRespawnCommandExecutor(HungerOnRespawnPlugin plugin) {
         this.plugin = plugin;
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (label.equalsIgnoreCase("reload")) {
-            if (sender.hasPermission("hungeronrespawn.reload")) {
-                plugin.reloadConfiguration();
-                sender.sendMessage(ChatColor.GREEN + "HungerOnRespawn configuration reloaded.");
-                return true;
-            } else {
-                sender.sendMessage(ChatColor.RED + "You do not have permission to use this command.");
-                return true;
-            }
-        } else if (label.equalsIgnoreCase("help")) {
-            if (sender.hasPermission("hungeronrespawn.help")) {
-                sender.sendMessage(ChatColor.GOLD + "HungerOnRespawn Commands:");
-                sender.sendMessage(ChatColor.YELLOW + "/reload - Reloads the plugin configuration.");
-                sender.sendMessage(ChatColor.YELLOW + "/help - Displays this help message.");
-                return true;
-            } else {
-                sender.sendMessage(ChatColor.RED + "You do not have permission to use this command.");
-                return true;
-            }
+        if (args.length == 0) {
+            return false; // Show usage
         }
-        return false;
+
+        String subCommand = args[0];
+        
+        switch (subCommand.toLowerCase()) {
+            case "reload":
+                return handleReload(sender);
+            case "help":
+                return handleHelp(sender);
+            default:
+                return false; // Show usage
+        }
+    }
+
+    private boolean handleReload(CommandSender sender) {
+        if (sender.hasPermission("hungeronrespawn.reload")) {
+            plugin.reloadConfig(); // 重新加载配置文件
+            plugin.loadConfig(); // 更新配置中的饱食度值
+            sender.sendMessage("Config reloaded.");
+            return true;
+        } else {
+            sender.sendMessage("You do not have permission to reload.");
+            return true;
+        }
+    }
+
+    private boolean handleHelp(CommandSender sender) {
+        sender.sendMessage("/hungeronrespawn reload - Reloads the plugin configuration.");
+        sender.sendMessage("/hungeronrespawn help - Shows this help message.");
+        return true;
     }
 }

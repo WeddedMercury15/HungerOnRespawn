@@ -6,18 +6,21 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.entity.Player;
 
 public class PlayerRespawnListener implements Listener {
-    private final HungerOnRespawn plugin;
 
-    public PlayerRespawnListener(HungerOnRespawn plugin) {
+    private final HungerOnRespawnPlugin plugin;
+
+    public PlayerRespawnListener(HungerOnRespawnPlugin plugin) {
         this.plugin = plugin;
     }
 
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent event) {
         Player player = event.getPlayer();
+
         if (player.hasPermission("hungeronrespawn.bypass")) {
-            return;
+            return; // 如果玩家有 bypass 权限，则跳过饱食度设置
         }
+
         int hungerLevel = plugin.getHungerLevel();
         player.setFoodLevel(hungerLevel);
     }
